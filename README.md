@@ -176,19 +176,54 @@ For this reason, I had to rename some fields to reduce the file size and speed u
 How we can see from the table, for smaller subsets of data (limits of 100,000 and 1,000,000 rows), the **server-side** execution times of both systems are quite **comparable**.  
 However, when scaling up to 5,000,000 rows, the **SQL** system performs about **ten times faster** than the NoSQL one.
 On the **client side**, the difference become even more significant: **SQL** is around **20** times faster than the normalized NoSQL dataset, and up to **60 times faster** compared to the denormalized version.
+|                       |      |100000|1000000|5000000  |
+|-----------------------|------|------|-------|---------|
+|SQL                    |Client|326,2 |3157,2 |16010    |
+||Server                 |32,4  |225,4 |966,2  |
+|NoSQL                  |Client|1123,2|14201,4|293954   |
+||Server                 |28,4  |246,8 |12242  |
+|NoSQL Denormalization 1|Client|1406,4|15938,2|1045558,8|
+||Server                 |18,4  |184,2 |10800,2|
+|NoSQL Denormalization 2|Client|1352,6|16886,8|1198041,4|
+||Server                 |17,2  |283,8 |11867  |
 
 #### Simple Filter
 When applying a simple filter on a single attribute (`ORIGIN_AIRPORT`), the **SQL system** remains consistently faster — **about five times faster** than the normalized NoSQL version and seven times faster than the first denormalized one.
+|                    |      |100000|1000000|100000|1000000|
+|--------------------|------|------|-------|------|-------|
+|SQL                 |Client|477,7 |1098,0 |217,3 |442,7  |
+||Server              |314,7 |715,0 |77,7   |141,3 |
+|NoSQL               |Client|2595,0|5646,7 |1178,7|2605,3 |
+||Server              |1536,7|3172,0|654,3  |1517,7|
+|NoSQL Denormalized 1|Client|3778,7|7629,7 |1899,0|5095,0 |
+||Server              |2511,0|4913,3|892,3  |2767,7|
+|NoSQL Denormalized 2|Client|2759,7|5881,3 |1920,7|4084,7 |
+||Server              |2036,7|4439,3|917,3  |2188,0|
 
 #### Complete Join
 
 In this case, the **NoSQL denormalized (version 1)** performs about **ten times better** than SQL on the **server side** for 100,000 and 1,000,000 rows, and shows comparable results for 5,000,000 rows.  
 However, on the **client side**, for 5,000,000 rows, it performs **ten times worse** than SQL.  
 The **NoSQL normalized** version is about **10 times slower** for 5,000,000 rows and 5 times for 100,000 and 1,000,000 
+|||100000|1000000|5000000|
+|-----------------------|------|------|-------|---------|
+|SQL                    |Client|749,2 |6853,2 |108827,2 |
+||Server                 |162,4 |1276,2|11700,8|
+|NoSQL                  |Client|2749,8|27711,2|1557562,4|
+||Server                 |862,6 |7869,6|57895,8|
+|NoSQL Denormalization 1|Client|1406,4|15938,2|1045558,8|
+||Server                 |18,4  |184,2 |10800,2|
+
 
 #### Simple Group By
 
 The **SQL system** performs about **five times better** than the **NoSQL normalized** version.
+|      |    | No Cache  |Cache |
+|------|------|--|----|
+|SQL   |Client|813,8 |226,4 |
+||Server|788,6 |283,6 |
+|NoSQL |Client|3710,4|1249,4|
+||Server|3535,6|1113,6|
 
 #### Group By with Join
 
@@ -198,6 +233,19 @@ However, **SQL** always performs better: it is about **70 times faster** than th
 
 I tried an **optimized** query for the NoSQL normalized version to produce the same result but in a smarter way: group first and then lookup (in this case joined rows are 14 instead of more than 5000000)
 The performance improves, becoming about **1.5–2 times faster** than the denormalized versions.
+
+||No Cache| Cache |
+|--------------------------------|-------|------|
+|SQL                             |978,2  |437,8 |
+||1010,2                          |547,8  |
+|NoSQL                           |70444,6|36761 |
+||71930,8                         |35104  |
+|NoSQL Denormalized 1            |5426,8 |3256,8|
+||5242,6                          |3377,4 |
+|NoSQL Denormalized 2            |4581,8 |2666,8|
+||4657,6                          |2504,4 |
+|NoSQL Normalized Optimized Query|3376,4 |1464,6|
+||3630                            |1380   |
 
 ## **Conclusions**
 
