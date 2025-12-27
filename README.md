@@ -44,7 +44,7 @@ Then I switched to a different dataset: in this case, there are only three table
 -   **Structure**:
     -   _Flights_: 31 columns, more than 5 million rows
     -   _Airlines_: 2 columns, 14 rows
-    -   _Airports_: 322 columns, 7 rows
+    -   _Airports_: 7 columns, 322 rows
 
 ### Import Procedure
 To import the dataset from CSV into both SQL and NoSQL systems, I used the standard automatic procedures provided by the tools (PostgreSQL and MongoDB Compass). I selected the same files for both systems, and the tools handled the import automatically.
