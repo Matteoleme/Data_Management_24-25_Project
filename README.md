@@ -3,6 +3,8 @@ Data Management 2024/2025
 ## Comparison between NoSQL tool and a relational DBMS
 In this project, I aim to compare NoSQL and SQL systems to highlight the advantages and disadvantages of each technology. By carrying out this work, I expect to gain a clearer understanding of what they are, when to use them, and especially how to apply these two types of systems effectively.
 
+The analysis is based on executing the same queries on both systems and comparing their execution times. In addition, the project explores the potential of NoSQL systems by denormalizing the dataset and storing the data in a different way, to evaluate whether this approach leads to improvements in terms of efficiency.
+
 ### SQL vs NoSQL
 For decades, SQL databases have been the standard for storing data. 
 They organize information in a structured way, with a simple data model, efficient concurrency management, and a standardized query language. SQL databases are based on the relational model: data is stored in tables and connected through relations.
