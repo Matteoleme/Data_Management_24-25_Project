@@ -187,6 +187,9 @@ On the **client side**, the difference become even more significant: **SQL** is 
 |NoSQL Denormalization 2|Client|1352,6|16886,8|1198041,4|
 ||Server                 |17,2  |283,8 |11867  |
 
+![Client side "Simple SELECT"](https://raw.githubusercontent.com/Matteoleme/Data_Management_24-25_Project/refs/heads/main/src/charts/Client%20side%20simple%20select.jpg)
+![Server side "Simple SELECT"](https://raw.githubusercontent.com/Matteoleme/Data_Management_24-25_Project/refs/heads/main/src/charts/Server%20side%20simple%20select.jpg)
+
 #### Simple Filter
 When applying a simple filter on a single attribute (`ORIGIN_AIRPORT`), the **SQL system** remains consistently faster — **about five times faster** than the normalized NoSQL version and seven times faster than the first denormalized one.
 |                    |      |100000|1000000|100000|1000000|
@@ -200,6 +203,7 @@ When applying a simple filter on a single attribute (`ORIGIN_AIRPORT`), the **SQ
 |NoSQL Denormalized 2|Client|2759,7|5881,3 |1920,7|4084,7 |
 ||Server              |2036,7|4439,3|917,3  |2188,0|
 
+![Simple filter](https://raw.githubusercontent.com/Matteoleme/Data_Management_24-25_Project/refs/heads/main/src/charts/Simple%20filter.jpg)
 #### Complete Join
 
 In this case, the **NoSQL denormalized (version 1)** performs about **ten times better** than SQL on the **server side** for 100,000 and 1,000,000 rows, and shows comparable results for 5,000,000 rows.  
@@ -214,6 +218,7 @@ The **NoSQL normalized** version is about **10 times slower** for 5,000,000 rows
 |NoSQL Denormalization 1|Client|1406,4|15938,2|1045558,8|
 ||Server                 |18,4  |184,2 |10800,2|
 
+![Complete Join](https://raw.githubusercontent.com/Matteoleme/Data_Management_24-25_Project/refs/heads/main/src/charts/Join%20completo.jpg)
 
 #### Simple Group By
 
@@ -247,6 +252,7 @@ The performance improves, becoming about **1.5–2 times faster** than the denor
 |NoSQL Normalized Optimized Query|3376,4 |1464,6|
 ||3630                            |1380   |
 
+![Group by with Join](https://raw.githubusercontent.com/Matteoleme/Data_Management_24-25_Project/refs/heads/main/src/charts/GroupBy%20con%20join.jpg)
 ## **Conclusions**
 
 From this analysis we can draw several interesting considerations.
